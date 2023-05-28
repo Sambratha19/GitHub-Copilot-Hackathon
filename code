@@ -1,0 +1,66 @@
+# GitHub-Copilot-Hackathon
+import java.util.HashMap;
+import java.util.Map;
+
+public class InventoryManagementSystem{
+	private Map<String, Integer> inventory;
+	public InventoryManagementSystem() {
+		this.inventory=new HashMap<>();
+	}
+	public void addProduct(String product, int quantity) {
+		if (inventory.containsKey(product)) {
+			int currentQuantity=inventory.get(product);
+			inventory.put(product, currentQuantity+quantity);
+		}
+		else {
+			inventory.put(product, quantity);
+		}
+		System.out.println("ADDING");
+		System.out.println(quantity + " unites of " + product +" added to the inventory.");
+
+	}
+	public void updateProduct(String product, int quantity) {
+		System.out.println("UPDATING");
+		if(inventory.containsKey(product)) {
+			inventory.put(product, quantity);
+			System.out.println(product + " quantity updated to " + quantity);
+        } else {
+            System.out.println(product + " does not exist in the inventory.");
+        }
+    }
+
+    public void removeProduct(String product) {
+	System.out.println("REMOVING");
+        if (inventory.containsKey(product)) {
+            inventory.remove(product);
+            System.out.println(product + " removed from the inventory.");
+        } else {
+            System.out.println(product + " does not exist in the inventory.");
+        }
+    }
+
+    public int checkStock(String product) {
+	System.out.println("CHECKING");
+        if (inventory.containsKey(product)) {
+            return inventory.get(product);
+        } else {
+            return 0;
+        }
+    }
+
+    public static void main(String[] args) {
+        InventoryManagementSystem inventorySystem = new InventoryManagementSystem();
+
+        inventorySystem.addProduct("iPhone X", 10);
+        inventorySystem.addProduct("MacBook Pro", 5);
+        inventorySystem.addProduct("iPhone X", 5);
+
+        System.out.println("Current stock of iPhone X: " + inventorySystem.checkStock("iPhone X"));
+
+        inventorySystem.updateProduct("MacBook Pro", 3);
+        inventorySystem.removeProduct("iPhone X");
+
+        System.out.println("Current stock of iPhone X: " + inventorySystem.checkStock("iPhone X"));
+        System.out.println("Current stock of MacBook Pro: " + inventorySystem.checkStock("MacBook Pro"));
+    }
+}
